@@ -1,98 +1,65 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
-    <head>
-        <style>
-        body {
-            padding: 100px;
-            width: 1000px;
-            margin: auto;
-            text-align: left;
-            font-weight: 300;
-            font-family: 'Open Sans', sans-serif;
-            color: #121212;
-        }
-        h1, h2, h3, h4 {
-            font-family: 'Source Sans Pro', sans-serif;
-        }
-        </style>
-        <title>CS 184 Rasterizer</title>
-        <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-        <link href="https://fonts.googleapis.com/css?family=Open+Sans|Source+Sans+Pro" rel="stylesheet">
-    </head>
+<head>
+<style>  
+    div.padded {  
+      padding-top: 0px;  
+      padding-right: 100px;  
+      padding-bottom: 0.25in;  
+      padding-left: 100px;  
+    }  
+  </style> 
+<title>Your Name  |  CS 184</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="style.css" media="screen" />
+</head>
+<body>
+<br />
+<h1 align="middle">Mod Minecraft - Realistic Sky Rendering and Water Animation </h1>
+    <h2 align="middle">Terrance Wang, Lara Chu, Brandon Choy, Roland Li </h2>
 
-    <body>
+    <div class="padded">
+        <p>For our final project for CS184, we want to create a mod for Minecraft to allow realistic sky rendering and water animations by building out a path tracer and implementing realistic clouds, improved sky gradients, water reflections, and more. </p>
 
-        <h1 align="middle">CS 184 Final Project: Variable lens raytracing and enhanced camera features</h1> 
-        <br />
-        <h1>Members</h1>
-        <p>
-            Amy Doo, Jordan Bell, Katlyn Ho, Su Latt Phone 
-        </p>
-        <h1>Summary</h1>
-        
-        <p>
-            Our project idea is to add functionality to the ray tracing engine that will allow it to render images as if the camera lens was composed of physical lenses rather than an approximation of lenses, while also being able to have the set of lenses used be based on user input. Additionally, we plan to add additional features that a real camera has, such as auto and pre-defined focus, flash, and auto brightness.
-        </p>
-        
-        <h1>
-            Problem Description
-        </h1>
-        <p>
-            In project 3, we modeled our camera as either having perfectly straight rays, or as having a single perfectly focused lens. In the real world, lenses are not so simple, and if we wanted to test what effect certain lens configurations could have on an image we would be unable to use the tool. By extending the raytracer to ray trace through physical lenses, we gain the ability to test lens effects before physically creating them, saving us from having to construct physical lenses or needing to work out complex math to determine the effect that it could have on the image. To extend this idea, we are implementing other characteristics of a camera to further help simulate physical cameras’ effects on images. These effects will be challenging as we will need to implement the various rules for light refracting through lenses, for every possible lens and for every set of lens configurations. We plan to implement these features by extending the project 3 raytracer. If we change how rays are generated before being sent through the raytracer, we can keep most of the features that we implemented before and prevent having to reimplement things. For changing focus, we can do some preprocessing on the image to determine possible pre-defined focus, and for autofocus we can create a heuristic to compare various values of focus to help decide on an optimal one. For flash and auto brightness we can either add an additional light element to the scene at the location of the camera, or do additional post processing on the image for auto brightness where we adjust every final pixel in the image.
-
-        </p>
+    <h2 align="middle">Problem Description</h2>
+        <p>Currently Minecraft possesses simple yet iconic block-styled graphics in their virtual worlds. Some examples of the current implementations of sky and water modeling are below:</p>
+        <div align="center">
+            <table style="width=100%">
+                <tr>
+                    <td align="middle">
+                    <img src="images/sky.png" width="480px" />
+                    <img src="images/water.png" width="480px" />
+                </tr>
+            </table>
+        </div>
+        <p>As you can see, some of the current features consist of blocked clouds, a simple sun consisting of a point light source, and flat dull non-reflective water. We want to implement more photorealistic and aesthetically pleasing skies and water with natural lighting by utilizing ray tracing on top of the existing Minecraft graphics. This problem is important to us as some of us are avid Minecraft players and given the importance of virtual environments in the COVID-19 pandemic, improving the game play and experience of Minecraft is more crucial now than ever. The challenging part of this will be creating an efficient ray tracer, and determining a realistic way of rendering clouds and water reflection and refraction.</p>
         
         <h2 align="middle">Goals and Deliverables</h2>
-        <h3>Part 1: Baseline Plan</h3>
-        <p>
-            Our main goal with this project is to extend the raytracer we had previously implemented to include additional features, such as autofocus, manual focus, and flash that can simulate the capabilities of a physical camera. Some deliverables would include before and after images for flash and short videos demonstrating how autofocus and manual focus can be used and how they can change the image. Our baseline plan for these features would be having them all as command line arguments. 
-        </p>
-        <p>
-            To measure the performance, we are going to do a comparison of different lens configurations and ensure that the runtime should be around the same for all of them. For the quality, we will be basing it off of similar tests in the spec since the work done in this past project is a baseline for what we plan to implement in our project.
-        </p>
         
+        <p> We will implement ray tracing in Minecraft and improve the way that the sky and water are rendered. We will try to add diffuse shadows and other effects implemented in previous projects in this minecraft shader. These goals should be doable because we are working off of concepts that we’ve previously covered and implemented in class, and there should be many resources and examples online of other people doing this as well. In the end, we just want something that looks visually pleasing and impressive. We’ll want to include photos of the water and the sky to show our new methods of rendering them. We can create a video of us walking through and demoing parts of Minecraft that are rendered differently with our shader. We can also include the shader pack and instructions on how to install so that others can play around with it on their own. To measure the quality of our mod, we will look at changes to FPS, and an eye test/photos comparing our mod with existing shader mods. We plan to determine how our shader pack compares to existing shaders and in what ways we differ from existing shaders, specifically analyzing how we render the water and the sky. We plan to implement ray tracing for the skies and water and if we’re ahead of schedule we hope to also add in ray tracing/shading for the general terrain and scenery as well. </p>
         
-        <h3>Part 2: Inspirational Plan</h3>
-        <p>
-            As mentioned in our baseline plan, our main goal is to “extend the raytracer we had previously implemented to include additional features, 
-            such as autofocus, manual focus, and flash that can simulate the capabilities of a physical camera.”  On top of these, if things go well 
-            and we have more time to further extend this project, for a new feature, we would like to try post-processing on the produced images for 
-            automatic brightness.  We will set a certain threshold to determine the middle ground for brightness to brighten an image if it’s too dark 
-            or darken an image if it’s too bright.<br /> To improve our current baseline plan, we would aim to convert parameter-setting on the terminal command 
-            line into an interactive part of the GUI in which the user can turn a dial or slider to change the focus or click a key or button to autofocus 
-            or enable flash.
-
-        </p>
-
-        <h3>Schedule</h3>
+        <h2 align="middle">Schedule</h2>
         
-            <ul>
-               <li> Week 1: 4/5 - 4/10</li>
-                <li>Proposal due 4/9</li>
-                <ul>
-                    <li>Jordan Bell: Title Summary, Problem Description, Goals and deliverables part 1</li>
-                    <li>Katlyn Ho: Goals and deliverables part 1, Tasks</li>
-                    <li>Su Latt: Goals and deliverables part 2</li>
-                    <li>Amy Doo: Resources</li>
-                </ul>
-              <li>Week 2: 4/11 - 4/17</li>
-              <ul><li>Proposal revisions + outline code</li></ul>
-              <li>Week 3: 4/18 - 4/24</li>
-              <ul><li>Continue working on code + milestone</li></ul>
-              <li>Week 4: 4/25 - 5/1</li>
-              <ul><li>Milestone due 4/27 + continue working on code</li></ul>
-              <li>Week 5: 5/2 - 5/8</li>
-              <ul><li>Finalize code + final presentations 5/6</li></ul>
-              <li>Week 6: 5/9 - 5/11</li>
-              <ul><li>Final deliverables due 5/11</li></ul>
-            </ul>
-
+        <p> April 13 : Setup Minecraft and download necessary resources. </p>
+        <p> April 13 - 16: Look into existing shader packs, conduct algorithm research and research how to render realistic water with a path tracer. </p>
+        <p> April 16 - 27: Implement a good path tracer and compare performance to existing path tracer mods. </p>
+        <p> April 27 - May 4: Implement water rendering: add texture, refraction, and reflection to the water. </p>
+        <p> May 4 - May 11: Implement sky rendering: retexture clouds and add natural lighting </p>
         
         <h2 align="middle">Resources</h2>
-        <p>
-            Our main reference will be an old <a href="https://cs184.eecs.berkeley.edu/sp16/article/19">spec</a> from a previous iteration of the class. We will be building off of someone’s ray tracer implementation from Project 3.
-            We will also use this <a href=https://www1.cs.columbia.edu/CAVE/publications/pdfs/Nayar_CVPR92.pdf>paper</a> to help make our autofocus algorithm efficient. We were also referencing this <a href=https://cs184.eecs.berkeley.edu/sp21/lecture/15/cameras-and-lenses>lecture</a> for our lens-ray interactions and auto focus methods.
-        </p>
+        
+        <a href="https://www.youtube.com/playlist?app=desktop&list=PLq1jSPKGzcoO0QZ704QJi919VW6nTbcM0">GLSL Tutorials for Minecraft</a>
+        <p> </p>
+        
+        <a href="http://jcgt.org/published/0010/01/01/paper-lowres.pdf">Improved Shader and Texture Level of Detail Using Ray Cones</a>
 
-    </body>
+        <p> We will use GLSL and the Minecraft interface to make this project.</p>
+</p>
+        
+</div>
+</body>
 </html>
+
+
+
+
